@@ -1,5 +1,6 @@
 ﻿using eShopSolution.Data.Configurations;
 using eShopSolution.Data.Entities;
+using eShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace eShopSolution.Data.EF
         }        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Configuration using Fluent API
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
@@ -30,6 +32,8 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
 
+            //Data Seeding Dữ liệu mẫu lam extensions
+            modelBuilder.Seed();
 
             //base.OnModelCreating(modelBuilder);
         }
@@ -52,7 +56,6 @@ namespace eShopSolution.Data.EF
         public DbSet<ProductTranslation> ProductTranslations { get; set; }
 
         public DbSet<Promotion> Promotions { get; set; }
-
 
         public DbSet<Transaction> Transactions { get; set; }
     }
